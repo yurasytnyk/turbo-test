@@ -6,7 +6,12 @@
 
 pre-push:
   parallel: true
+  only:
+    - ref: "(develop|fix|bugfix|hotfix|feat|feature|release|chore)/*"
   jobs:
+    - name: branch name lint
+      run: pnpm branch-name-lint
+
     - name: packages audit
       tags:
         - frontend
@@ -16,7 +21,7 @@ pre-push:
 prepare-commit-msg:
   parallel: true
   scripts:
-    'commitizen.sh':
+    "commitizen.sh":
       interactive: true
       runner: bash
       skip:
@@ -26,7 +31,7 @@ prepare-commit-msg:
 
 commit-msg:
   commands:
-    'lint commit message':
+    "lint commit message":
       run: pnpm commitlint --edit {1}
     spell-check:
       run: pnpm cspell --no-summary {1}
@@ -38,20 +43,19 @@ pre-commit:
     - pnpm-lock.yaml
   commands:
     cspell:
-      glob: '*.{tsx,ts,mts,mcs,mjs,cjs,js,json,md,yml,yaml}'
+      glob: "*.{tsx,ts,mts,mcs,mjs,cjs,js,json,md,yml,yaml}"
       run: pnpm cspell lint --gitignore --cache {staged_files}
 
     prettier:
       run: pnpm prettier --write {staged_files}
-      glob: '*.{tsx,ts,mts,mcs,mjs,cjs,js,json,md,yml,yaml}'
+      glob: "*.{tsx,ts,mts,mcs,mjs,cjs,js,json,md,yml,yaml}"
       stage_fixed: true
 
     lint:
       run: pnpm lint {staged_files}
-      glob: '(apps|packages)/**/*.{tsx,ts,mts,mcs,mjs,cjs,js,json}'
+      glob: "(apps|packages)/**/*.{tsx,ts,mts,mcs,mjs,cjs,js,json}"
       stage_fixed: true
 
     check-types:
       run: pnpm check-types {staged_files}
-      glob: '(apps|packages)/**/*.{tsx,ts,mts}'
-
+      glob: "(apps|packages)/**/*.{tsx,ts,mts}"

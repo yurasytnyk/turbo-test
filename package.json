@@ -13,6 +13,7 @@
     "commit": "cz commit"
   },
   "devDependencies": {
+    "@b12k/branch-name-lint": "^1.3.0",
     "@commitlint/cli": "^20.3.0",
     "@commitlint/config-conventional": "^20.3.0",
     "@commitlint/types": "^20.2.0",
@@ -30,7 +31,8 @@
   },
   "pnpm": {
     "overrides": {
-      "js-yaml": "4.1.1"
+      "js-yaml": "4.1.1",
+      "tmp": "0.2.4"
     }
   },
   "config": {
