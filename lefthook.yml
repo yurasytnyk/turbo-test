@@ -1,0 +1,60 @@
+# EXAMPLE USAGE:
+#
+#   Refer for explanation to following link:
+#   https://lefthook.dev/configuration/
+#
+
+pre-push:
+  parallel: true
+  scripts:
+    "branchnamelint.config.js":
+      runner: bash
+  jobs:
+    - name: packages audit
+      tags:
+        - frontend
+        - security
+      run: pnpm audit
+
+prepare-commit-msg:
+  parallel: true
+  scripts:
+    'commitizen.sh':
+      interactive: true
+      runner: bash
+      skip:
+        - merge
+        - rebase
+        - amend
+
+commit-msg:
+  commands:
+    'lint commit message':
+      run: pnpm commitlint --edit {1}
+    spell-check:
+      run: pnpm cspell --no-summary {1}
+
+pre-commit:
+  parallel: true
+  exclude:
+    - lefthook.yml
+    - pnpm-lock.yaml
+  commands:
+    cspell:
+      glob: '*.{tsx,ts,mts,mcs,mjs,cjs,js,json,md,yml,yaml}'
+      run: pnpm cspell lint --gitignore --cache {staged_files}
+
+    prettier:
+      run: pnpm prettier --write {staged_files}
+      glob: '*.{tsx,ts,mts,mcs,mjs,cjs,js,json,md,yml,yaml}'
+      stage_fixed: true
+
+    lint:
+      run: pnpm lint {staged_files}
+      glob: '(apps|packages)/**/*.{tsx,ts,mts,mcs,mjs,cjs,js,json}'
+      stage_fixed: true
+
+    check-types:
+      run: pnpm check-types {staged_files}
+      glob: '(apps|packages)/**/*.{tsx,ts,mts}'
+
