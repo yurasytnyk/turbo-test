@@ -7,14 +7,14 @@
 pre-push:
   parallel: true
   jobs:
+    - name: branch name lint
+      run: pnpm branch-name-lint
+
     - name: packages audit
       tags:
         - frontend
         - security
-      run: pnpm audit
-    
-    - name: branch name lint
-      run: branch-name-lint
+      run: pnpm audit    
 
 prepare-commit-msg:
   parallel: true
