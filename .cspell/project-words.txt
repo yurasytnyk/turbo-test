@@ -7,3 +7,4 @@ VayaPin
 serviceworker
 logomark
 lefthook
+brachnamelint
