@@ -1,20 +1,43 @@
 {
-  "name": "my-turborepo",
+  "name": "VayaPin platform",
   "private": true,
+  "version": "0.1.0",
+  "description": "Empowering everyone with a PRECISE digital address.",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md,json,yaml,yml}\"",
+    "check-types": "turbo run check-types",
+    "postinstall": "lefthook install",
+    "commit": "cz commit"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.3.0",
+    "@commitlint/config-conventional": "^20.3.0",
+    "@commitlint/types": "^20.2.0",
+    "commitizen": "^4.3.1",
+    "conventional-changelog-atom": "^5.0.0",
+    "cspell": "^9.4.0",
+    "cz-conventional-changelog": "^3.3.0",
     "prettier": "^3.7.4",
     "turbo": "^2.7.4",
     "typescript": "5.9.2"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {
-    "node": ">=18"
+    "node": "24.x"
+  },
+  "pnpm": {
+    "overrides": {
+      "js-yaml": "4.1.1"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog",
+      "maxHeaderWidth": 50,
+      "maxLineWidth": 72
+    }
   }
 }
