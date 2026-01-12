@@ -6,9 +6,6 @@
 
 pre-push:
   parallel: true
-  scripts:
-    "branchnamelint.config.js":
-      runner: bash
   jobs:
     - name: packages audit
       tags:
