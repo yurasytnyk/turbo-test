@@ -6,15 +6,15 @@
 
 pre-push:
   parallel: true
-  scripts:
-    "branchnamelint.config.js":
-      runner: bash
   jobs:
     - name: packages audit
       tags:
         - frontend
         - security
       run: pnpm audit
+    
+    - name: branch name lint
+      run: branch-name-lint
 
 prepare-commit-msg:
   parallel: true
