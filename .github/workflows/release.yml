@@ -27,7 +27,7 @@ jobs:
         with:
           github-token: ${{ secrets.NPM_TOKEN }}
 
-      - name: Create Release Pull Request or Publish to GitHub Packages
+      - name: Create Release Pull Request or Publish to GitHub Packages 1
         id: changesets
         uses: changesets/action@v1
         with:
