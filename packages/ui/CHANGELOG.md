@@ -1,5 +1,11 @@
 # @yurasytnyk/ui
 
+## 0.0.4
+
+### Patch Changes
+
+- [`6fe5a7c`](https://github.com/yurasytnyk/turbo-test/commit/6fe5a7cd85447b16e33a487163b408373468bcc3) Thanks [@yurasytnyk](https://github.com/yurasytnyk)! - updated button
+
 ## 0.0.3
 
 ### Patch Changes
