@@ -31,42 +31,20 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Debug - Check token (first/last 4 chars)
-        run: |
-          echo "Token starts with: ${GITHUB_TOKEN:0:4}"
-          echo "Token ends with: ${GITHUB_TOKEN: -4}"
-          echo "Token length: ${#GITHUB_TOKEN}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Debug - Check npm config before .npmrc creation
-        run: |
-          echo "=== NPM Config ==="
-          npm config list
-          echo "=== PNPM Config ==="
-          pnpm config list
-
-      - name: Create .npmrc
+      - name: Create .npmrc with actual token
         run: |
           cat << EOF > "$HOME/.npmrc"
-          //npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}
+          //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
           EOF
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Debug - Check .npmrc content (masked)
+      - name: Debug - Verify .npmrc (token will be masked)
         run: |
-          echo "=== .npmrc location ==="
-          ls -la $HOME/.npmrc
-          echo "=== .npmrc content (token will be masked) ==="
+          echo "=== .npmrc content ==="
           cat $HOME/.npmrc
 
-      - name: Debug - Test authentication
+      - name: Test authentication
         run: |
-          echo "Testing auth with npm whoami..."
-          npm whoami --registry=https://npm.pkg.github.com/ || echo "npm whoami failed"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          npm whoami --registry=https://npm.pkg.github.com/ || echo "Auth test failed"
 
       - name: Create Release Pull Request or Publish to GitHub Packages
         id: changesets
