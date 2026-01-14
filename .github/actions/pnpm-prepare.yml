@@ -1,0 +1,29 @@
+name: "Pnpm prepare (Node, Pnpm install)"
+description: "Install right node version and node dependencies"
+inputs:
+  github-token:
+    description: "GitHub token for private registry access"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10
+    - name: Setup Node.js
+      id: setup-node
+      uses: ubuntu-latest
+      with:
+        node-version-file: .nvmrc
+        cache: pnpm
+        scope: "@yurasytnyk"
+        registry-url: "https://npm.pkg.github.com"
+
+    - name: Configure pnpm Auth for private registry
+      run: pnpm config set //npm.pkg.github.com/:_authToken=${{ inputs.github-token }}
+      shell: bash
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      shell: bash
