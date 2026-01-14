@@ -1,50 +1,30 @@
 name: Release
+
 on:
   push:
     branches:
       - main
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
 permissions:
-  contents: write
+  contents: read
   packages: write
-  pull-requests: write
+
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code repository
+      - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: pnpm
-          registry-url: "https://npm.pkg.github.com"
-
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Create .npmrc with actual token
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-          //npm.pkg.github.com/:_authToken=${{ secrets.NPM_GITHUB_TOKEN }}
-          EOF
-
-      - name: Debug - Verify .npmrc (token will be masked)
-        run: |
-          echo "=== .npmrc content ==="
-          cat $HOME/.npmrc
-
-      - name: Test authentication
-        run: |
-          npm whoami --registry=https://npm.pkg.github.com/ || echo "Auth test failed"
+        uses: ./.github/actions/pnpm-prepare
+        with:
+          github-token: ${{ secrets.NPM_GITHUB_TOKEN }}
 
       - name: Create Release Pull Request or Publish to GitHub Packages
         id: changesets
