@@ -8,3 +8,6 @@ serviceworker
 logomark
 lefthook
 brachnamelint
+nvmrc
+chakra
+yurasytnyk

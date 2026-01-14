@@ -5,6 +5,9 @@ node_modules
 .pnp
 .pnp.js
 
+# Cache files
+.cspellcache
+
 # Local env files
 .env
 .env.local

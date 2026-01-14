@@ -1,19 +1,23 @@
 {
-  "name": "VayaPin platform",
+  "name": "my-turborepo",
   "private": true,
   "version": "0.1.0",
   "description": "Empowering everyone with a PRECISE digital address.",
+  "repository": "https://github.com/yurasytnyk/turbo-test.git",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md,json,yaml,yml}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
     "postinstall": "lefthook install",
-    "commit": "cz commit"
+    "commit": "cz commit",
+    "version": "changeset version",
+    "release": "pnpm run build && changeset publish"
   },
   "devDependencies": {
     "@b12k/branch-name-lint": "^1.3.0",
+    "@changesets/cli": "^2.29.8",
     "@commitlint/cli": "^20.3.0",
     "@commitlint/config-conventional": "^20.3.0",
     "@commitlint/types": "^20.2.0",
@@ -21,11 +25,12 @@
     "conventional-changelog-atom": "^5.0.0",
     "cspell": "^9.4.0",
     "cz-conventional-changelog": "^3.3.0",
+    "lefthook": "^2.0.15",
     "prettier": "^3.7.4",
     "turbo": "^2.7.4",
     "typescript": "5.9.2"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@10.27.0",
   "engines": {
     "node": "24.x"
   },
