@@ -1,5 +1,5 @@
 {
-  "name": "@repo/ui",
+  "name": "@yurasytnyk/ui",
   "version": "0.0.0",
   "type": "module",
   "exports": {
@@ -20,8 +20,8 @@
     "build": "tsup"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@yurasytnyk/eslint-config": "workspace:*",
+    "@yurasytnyk/typescript-config": "workspace:*",
     "@types/node": "^22.15.3",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
