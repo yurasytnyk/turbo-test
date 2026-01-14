@@ -1,5 +1,12 @@
 # web
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [[`6fe5a7c`](https://github.com/yurasytnyk/turbo-test/commit/6fe5a7cd85447b16e33a487163b408373468bcc3)]:
+  - @yurasytnyk/ui@0.0.4
+
 ## 0.1.3
 
 ### Patch Changes
