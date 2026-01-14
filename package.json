@@ -45,5 +45,8 @@
       "maxHeaderWidth": 50,
       "maxLineWidth": 72
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }
