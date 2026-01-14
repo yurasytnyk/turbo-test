@@ -21,11 +21,26 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          # CRITICAL: Changesets needs the full git history to work correctly
+          fetch-depth: 0
 
       - name: Install dependencies
         uses: ./.github/actions/pnpm-prepare
         with:
           github-token: ${{ secrets.NPM_GITHUB_TOKEN }}
+
+      # DEBUG STEP: This will allow you to see exactly what pnpm sees
+      - name: Diagnostic Debug
+        run: |
+          echo "=== NPM CONFIG ==="
+          npm config list
+          echo "=== TOKEN CHECK ==="
+          echo "NODE_AUTH_TOKEN length: ${#NODE_AUTH_TOKEN}"
+          echo "=== REGISTRY CHECK ==="
+          npm config get @yurasytnyk:registry
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
 
       - name: Create Release Pull Request or Publish to GitHub Packages
         id: changesets
@@ -34,8 +49,11 @@ jobs:
           publish: pnpm release
           commit: "chore: update versions"
           title: "chore: update versions"
+          # Optional: creates a GitHub Release with changelog notes
+          createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
+          # This env var acts like a line in .npmrc
           NPM_CONFIG_@YURASYTNYK_REGISTRY: "https://npm.pkg.github.com"
