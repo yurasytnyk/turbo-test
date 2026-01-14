@@ -27,6 +27,12 @@ jobs:
         with:
           github-token: ${{ secrets.NPM_GITHUB_TOKEN }}
 
+      - name: Debug pnpm auth
+        run: |
+          echo "NODE_AUTH_TOKEN set? ${NODE_AUTH_TOKEN:+yes}"
+          echo "NPM registry auth token:"
+          pnpm config get //npm.pkg.github.com/:_authToken
+
       - name: Create Release Pull Request or Publish to GitHub Packages
         id: changesets
         uses: changesets/action@v1
