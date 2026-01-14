@@ -22,7 +22,7 @@ runs:
     - name: Configure pnpm Auth for private registry
       run: |
         echo "//npm.pkg.github.com/:_authToken=${{ inputs.github-token }}" >> ~/.npmrc
-        echo "NODE_AUTH_TOKEN=${{ inputs.github-token }}" >> $GITHUB_ENV
+        echo "NPM_GITHUB_TOKEN=${{ inputs.github-token }}" >> $GITHUB_ENV
       shell: bash
 
     - name: Install dependencies
