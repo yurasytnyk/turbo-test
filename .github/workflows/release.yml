@@ -18,13 +18,21 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      - name: Checkout code repository
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        uses: ./.github/actions/pnpm-prepare
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup node.js
+        uses: actions/setup-node@v4
         with:
-          github-token: ${{ secrets.NPM_GITHUB_TOKEN }}
+          node-version-file: .nvmrc
+          cache: pnpm
+          registry-url: "https://npm.pkg.github.com"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Create Release Pull Request or Publish to GitHub Packages
         id: changesets
