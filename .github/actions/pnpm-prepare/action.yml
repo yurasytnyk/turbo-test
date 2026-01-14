@@ -15,8 +15,8 @@ runs:
       with:
         node-version-file: .nvmrc
         cache: pnpm
-        registry-url: "https://npm.pkg.github.com"
-        scope: "@yurasytnyk"
+        registry-url: "https://registry.npmjs.org"
+        scope: "@yura_sytnyk"
         always-auth: true
         token: ${{ inputs.github-token }}
 

@@ -12,3 +12,5 @@ nvmrc
 chakra
 yurasytnyk
 npmjs
+yura
+sytnyk
