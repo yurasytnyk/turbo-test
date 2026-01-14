@@ -54,6 +54,8 @@ jobs:
           # 3. Always-auth is often required for GitHub Packages
           echo "always-auth=true" >> "$HOME/.npmrc"
         shell: bash
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
 
       - name: Create Release Pull Request or Publish to GitHub Packages
         id: changesets
