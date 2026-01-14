@@ -42,6 +42,19 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
 
+      - name: Creating .npmrc in HOME
+        run: |
+          # 1. Map the scope to GitHub
+          echo "@yurasytnyk:registry=https://npm.pkg.github.com" > "$HOME/.npmrc"
+
+          # 2. Assign the token specifically to the GitHub Packages URL
+          # Note: We use the variable syntax so pnpm can pick it up from the environment
+          echo "//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}" >> "$HOME/.npmrc"
+
+          # 3. Always-auth is often required for GitHub Packages
+          echo "always-auth=true" >> "$HOME/.npmrc"
+        shell: bash
+
       - name: Create Release Pull Request or Publish to GitHub Packages
         id: changesets
         uses: changesets/action@v1
@@ -49,11 +62,6 @@ jobs:
           publish: pnpm release
           commit: "chore: update versions"
           title: "chore: update versions"
-          # Optional: creates a GitHub Release with changelog notes
-          createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
-          # This env var acts like a line in .npmrc
-          NPM_CONFIG_@YURASYTNYK_REGISTRY: "https://npm.pkg.github.com"
