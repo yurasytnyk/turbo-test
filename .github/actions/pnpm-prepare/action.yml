@@ -11,18 +11,22 @@ runs:
       uses: pnpm/action-setup@v4
 
     - name: Setup Node.js
-      id: setup-node
       uses: actions/setup-node@v4
       with:
         node-version-file: .nvmrc
         cache: pnpm
-        scope: "@yurasytnyk"
         registry-url: "https://npm.pkg.github.com"
+        scope: "@yurasytnyk"
 
-    - name: Configure pnpm Auth for private registry
+    - name: Configure Environment
       run: |
-        echo "//npm.pkg.github.com/:_authToken=${{ inputs.github-token }}" >> ~/.npmrc
-        echo "NPM_GITHUB_TOKEN=${{ inputs.github-token }}" >> $GITHUB_ENV
+        echo "NODE_AUTH_TOKEN=${{ inputs.github-token }}" >> $GITHUB_ENV
+        # Debugging: Print the length of the token to verify it exists
+        TOKEN_LENGTH=${#NODE_AUTH_TOKEN}
+        echo "Debug: NODE_AUTH_TOKEN is set. Length: $TOKEN_LENGTH"
+
+        # Debugging: Print the first 4 characters
+        echo "Debug: Token prefix: ${NODE_AUTH_TOKEN:0:4}..."
       shell: bash
 
     - name: Install dependencies
