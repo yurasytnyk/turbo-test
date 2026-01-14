@@ -53,7 +53,7 @@ importers:
 
   apps/docs:
     dependencies:
-      '@repo/ui':
+      '@yurasytnyk/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       next:
@@ -66,12 +66,6 @@ importers:
         specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
     devDependencies:
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
       '@types/node':
         specifier: ^22.15.3
         version: 22.15.3
@@ -81,6 +75,12 @@ importers:
       '@types/react-dom':
         specifier: 19.2.2
         version: 19.2.2(@types/react@19.2.2)
+      '@yurasytnyk/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@yurasytnyk/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       eslint:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.6.1)
@@ -90,7 +90,7 @@ importers:
 
   apps/web:
     dependencies:
-      '@repo/ui':
+      '@yurasytnyk/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       next:
@@ -103,12 +103,6 @@ importers:
         specifier: ^19.2.0
         version: 19.2.0(react@19.2.0)
     devDependencies:
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
       '@types/node':
         specifier: ^22.15.3
         version: 22.15.3
@@ -118,6 +112,12 @@ importers:
       '@types/react-dom':
         specifier: 19.2.2
         version: 19.2.2(@types/react@19.2.2)
+      '@yurasytnyk/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@yurasytnyk/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       eslint:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.6.1)
@@ -184,12 +184,6 @@ importers:
         specifier: ^5.5.0
         version: 5.5.0(react@19.2.0)
     devDependencies:
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
       '@types/node':
         specifier: ^22.15.3
         version: 22.15.3
@@ -199,6 +193,12 @@ importers:
       '@types/react-dom':
         specifier: 19.2.2
         version: 19.2.2(@types/react@19.2.2)
+      '@yurasytnyk/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@yurasytnyk/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
       eslint:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.6.1)
