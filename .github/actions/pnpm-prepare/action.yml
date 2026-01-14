@@ -17,6 +17,8 @@ runs:
         cache: pnpm
         registry-url: "https://npm.pkg.github.com"
         scope: "@yurasytnyk"
+        always-auth: true
+        token: ${{ inputs.github-token }}
 
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
